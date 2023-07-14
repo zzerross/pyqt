@@ -5,11 +5,11 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget
 
 
 class Widget(QWidget):
-    signal = pyqtSignal(int, str)
+    signal = pyqtSignal(object)
 
     def __init__(self):
         super().__init__()
-        self.mouseReleaseEvent = lambda event: self.signal.emit(123, 'hello')
+        self.mouseDoubleClickEvent = lambda event: self.signal.emit(event)
 
 
 class MainWindow(QMainWindow):
@@ -20,8 +20,8 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
     @staticmethod
-    def on_signal(number, message):
-        print(number, message)
+    def on_signal(event):
+        print(event)
 
 
 if __name__ == '__main__':
